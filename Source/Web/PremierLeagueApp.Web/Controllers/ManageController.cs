@@ -9,7 +9,7 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
-    using PremierLeagueApp.Web.ViewModels;
+    using PremierLeagueApp.Web.Models;
 
     [Authorize]
     public class ManageController : Controller

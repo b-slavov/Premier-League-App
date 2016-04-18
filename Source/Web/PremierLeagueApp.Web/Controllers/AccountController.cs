@@ -9,7 +9,8 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
-    using PremierLeagueApp.Web.ViewModels;
+    using PremierLeagueApp.Data.Models;
+    using PremierLeagueApp.Web.Models;
 
     [Authorize]
     public class AccountController : Controller

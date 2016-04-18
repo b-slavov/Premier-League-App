@@ -8,7 +8,8 @@
     using Microsoft.Owin.Security.Cookies;
     using Owin;
 
-    using PremierLeagueApp.Web.ViewModels;
+    using PremierLeagueApp.Data;
+    using PremierLeagueApp.Data.Models;
 
     public partial class Startup
     {

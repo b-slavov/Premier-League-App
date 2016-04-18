@@ -1,6 +1,8 @@
-﻿namespace PremierLeagueApp.Web.ViewModels
+﻿namespace PremierLeagueApp.Data
 {
     using Microsoft.AspNet.Identity.EntityFramework;
+
+    using PremierLeagueApp.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

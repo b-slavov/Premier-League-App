@@ -234,8 +234,6 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewModels\ApplicationUser.cs" />
-    <Compile Include="ViewModels\IdentityModels.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
@@ -321,6 +319,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\PremierLeagueApp.Data.Common\PremierLeagueApp.Data.Common.csproj">
+      <Project>{06bea6fe-dfc7-4bbf-a2b7-ec9f85462ada}</Project>
+      <Name>PremierLeagueApp.Data.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PremierLeagueApp.Data.Models\PremierLeagueApp.Data.Models.csproj">
+      <Project>{795a6f7e-eefd-4ed6-94a7-31c601bddd7a}</Project>
+      <Name>PremierLeagueApp.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PremierLeagueApp.Data\PremierLeagueApp.Data.csproj">
+      <Project>{eb03f6d6-891e-4f80-a1b8-37cc739f2c82}</Project>
+      <Name>PremierLeagueApp.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
