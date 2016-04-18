@@ -38,7 +38,6 @@
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-
         }
     }
 }
