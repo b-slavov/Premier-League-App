@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PremierLeagueApp.Data.Common\PremierLeagueApp.Data.Common.csproj">
+      <Project>{06bea6fe-dfc7-4bbf-a2b7-ec9f85462ada}</Project>
+      <Name>PremierLeagueApp.Data.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PremierLeagueApp.Data.Models\PremierLeagueApp.Data.Models.csproj">
       <Project>{795a6f7e-eefd-4ed6-94a7-31c601bddd7a}</Project>
       <Name>PremierLeagueApp.Data.Models</Name>
