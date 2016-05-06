@@ -16,6 +16,10 @@
         {
         }
 
+        public IDbSet<News> News { get; set; }
+
+        public IDbSet<Club> Clubs { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -1,10 +1,19 @@
 ﻿namespace PremierLeagueApp.Web
 {
+    using System.Data.Entity;
     using System.Reflection;
     using System.Web.Mvc;
 
     using Autofac;
     using Autofac.Integration.Mvc;
+
+    using Controllers;
+
+    using Data;
+    using Data.Common;
+
+    using Services.Data;
+    using Services.Web;
 
     public static class AutofacConfig
     {
@@ -38,6 +47,25 @@
 
         private static void RegisterServices(ContainerBuilder builder)
         {
+            builder.Register(x => new ApplicationDbContext())
+                .As<DbContext>()
+                .InstancePerRequest();
+            builder.Register(x => new HttpCacheService())
+                .As<ICacheService>()
+                .InstancePerRequest();
+            builder.Register(x => new IdentifierProvider())
+                .As<IIdentifierProvider>()
+                .InstancePerRequest();
+
+            var servicesAssembly = Assembly.GetAssembly(typeof(INewsService));
+            builder.RegisterAssemblyTypes(servicesAssembly).AsImplementedInterfaces();
+
+            builder.RegisterGeneric(typeof(DbRepository<>))
+                .As(typeof(IDbRepository<>))
+                .InstancePerRequest();
+
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<BaseController>().PropertiesAutowired();
         }
     }
 }

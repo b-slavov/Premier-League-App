@@ -1,4 +1,4 @@
-﻿namespace PremierLeagueApp.Web.Models
+﻿namespace PremierLeagueApp.Web.ViewModels.Account
 {
     public class ExternalLoginListViewModel
     {
