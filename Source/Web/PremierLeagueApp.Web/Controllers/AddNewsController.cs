@@ -1,5 +1,6 @@
 ﻿namespace MvcTemplate.Web.Controllers
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Net;
@@ -7,22 +8,10 @@
 
     using PremierLeagueApp.Data;
     using PremierLeagueApp.Data.Models;
-    using System;
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
-    using Newtonsoft.Json.Linq;
 
     public class AddNewsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        private IList<Club> GetPremierLeagueTeams()
-        {
-            var client = new WebClient();
-            string content = client.DownloadString("http://api.football-data.org/v1/soccerseasons/398/teams");
-            IList<Club> clubs = JsonConvert.DeserializeObject<FootballData>(content).Teams;
-            return clubs;
-        }
 
         // GET: AddNews
         public ActionResult Index()
@@ -52,7 +41,7 @@
         public ActionResult Create()
         {
             this.ViewBag.ClubId = new SelectList(this.db.Clubs, "Id", "Name");
-            this.ViewData["Teams"] = this.GetPremierLeagueTeams()
+            this.ViewData["Teams"] = Crawler.TeamsInfo.GetPremierLeagueTeams().OrderBy(x => x.Name)
                 .Select(x => new SelectListItem
                 {
                     Text = x.Name, Value = x.Id.ToString()

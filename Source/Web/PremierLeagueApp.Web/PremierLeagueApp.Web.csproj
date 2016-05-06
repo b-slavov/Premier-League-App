@@ -88,7 +88,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -206,6 +206,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
+    <Compile Include="Controllers\TableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -513,6 +514,10 @@
     <ProjectReference Include="..\..\Services\PremierLeagueApp.Services.Web\PremierLeagueApp.Services.Web.csproj">
       <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
       <Name>PremierLeagueApp.Services.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tools\Crawler\Crawler.csproj">
+      <Project>{ae824fc6-40a5-4f83-8d0f-54bee0cd9bf8}</Project>
+      <Name>Crawler</Name>
     </ProjectReference>
     <ProjectReference Include="..\PremierLeagueApp.Web.Infrastructure\PremierLeagueApp.Web.Infrastructure.csproj">
       <Project>{6813dc53-5eee-4507-8604-5301ee51a0d3}</Project>
