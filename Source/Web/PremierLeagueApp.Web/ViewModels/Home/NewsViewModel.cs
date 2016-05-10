@@ -1,24 +1,24 @@
 ﻿namespace PremierLeagueApp.Web.ViewModels.Home
 {
     using System;
-
-    using AutoMapper;
+    using System.Web.Mvc;
 
     using PremierLeagueApp.Data.Models;
     using PremierLeagueApp.Services.Web;
     using PremierLeagueApp.Web.Infrastructure.Mapping;
 
-    public class NewsViewModel : IMapFrom<News>, IHaveCustomMappings
+    public class NewsViewModel : IMapFrom<News>
     {
         public int Id { get; set; }
 
-        public byte[] Image { get; set; }
+        public string ImageUrl { get; set; }
 
         public string Title { get; set; }
 
+        [AllowHtml]
         public string Content { get; set; }
 
-        public string Club { get; set; }
+        public int ClubId { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
@@ -29,12 +29,6 @@
                 IIdentifierProvider identifier = new IdentifierProvider();
                 return $"/News/{identifier.EncodeId(this.Id)}";
             }
-        }
-
-        public void CreateMappings(IMapperConfiguration configuration)
-        {
-            configuration.CreateMap<News, NewsViewModel>()
-                .ForMember(x => x.Club, opt => opt.MapFrom(x => x.Club.Name));
         }
     }
 }

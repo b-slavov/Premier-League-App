@@ -8,6 +8,7 @@
 
     using PremierLeagueApp.Data;
     using PremierLeagueApp.Data.Models;
+    using PremierLeagueApp.Web.ViewModels.Home;
 
     public class AddNewsController : Controller
     {
@@ -40,8 +41,7 @@
         // GET: AddNews/Create
         public ActionResult Create()
         {
-            this.ViewBag.ClubId = new SelectList(this.db.Clubs, "Id", "Name");
-            this.ViewData["Teams"] = Crawler.TeamsInfo.GetPremierLeagueTeams().OrderBy(x => x.Name)
+            this.ViewData["Teams"] = this.db.Clubs.OrderBy(x => x.Name)
                 .Select(x => new SelectListItem
                 {
                     Text = x.Name, Value = x.Id.ToString()
@@ -55,17 +55,22 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Image,Title,Content,ClubId,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] News news)
+        public ActionResult Create(NewsViewModel news)
         {
+            var article = new News();
             if (this.ModelState.IsValid)
             {
-                news.CreatedOn = DateTime.Now;
-                this.db.News.Add(news);
+                article.ImageUrl = news.ImageUrl;
+                article.Title = news.Title;
+                article.Content = news.Content;
+                article.CreatedOn = DateTime.Now;
+                article.ClubId = news.ClubId;
+                this.db.News.Add(article);
                 this.db.SaveChanges();
+
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewBag.ClubId = new SelectList(this.db.Clubs, "Id", "Name", news.ClubId);
             return this.View(news);
         }
 
@@ -92,12 +97,14 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Image,Title,Content,ClubId,CreatedOn,ModifiedOn,IsDeleted,DeletedOn")] News news)
+        public ActionResult Edit(News news)
         {
             if (this.ModelState.IsValid)
             {
+                news.ModifiedOn = DateTime.Now;
                 this.db.Entry(news).State = EntityState.Modified;
                 this.db.SaveChanges();
+
                 return this.RedirectToAction("Index");
             }
 
