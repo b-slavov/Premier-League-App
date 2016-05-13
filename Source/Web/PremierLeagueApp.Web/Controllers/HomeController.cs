@@ -3,11 +3,9 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using Infrastructure.Mapping;
-
-    using Services.Data;
-
-    using ViewModels.Home;
+    using PremierLeagueApp.Services.Data;
+    using PremierLeagueApp.Web.Infrastructure.Mapping;
+    using PremierLeagueApp.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
