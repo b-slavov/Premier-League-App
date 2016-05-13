@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h2>
+        <h3>
             Latest News
             <form class="form-inline pull-right" id="search" method="get">
                 <div class="input-group">
@@ -41,16 +41,17 @@
                 <a class="btn btn-default btn-sm" href="/AddNews"><i class="glyphicon glyphicon-plus"></i> Add news</a>
             </div>
 
-        </h2>
+        </h3>
     </div>
 </div>
 
 <div class="row">
     @foreach (var news in Model.News)
     {
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a href="@news.Url">
-                @Html.Raw(news.Content.Replace("\n", "<br />"))
+                <img src="@Url.Content(news.ImageUrl)" alt="Image" />
+                @Html.Raw(news.Title)
             </a>
         </div>
     }

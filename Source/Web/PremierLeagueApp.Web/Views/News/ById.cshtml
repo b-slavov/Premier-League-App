@@ -4,17 +4,15 @@
 }
 
 <div>
-    @Model.Image
+    <h1>
+        @Model.Title
+    </h1>
 </div>
 <div>
-    @Model.Title
+    <img src="@Url.Content(Model.ImageUrl)" alt="Image" />
 </div>
 <div>
-    @Model.Content
-</div>
-<div>
-    @Model.CreatedOn
-</div>>
-<div>
-    @Model.Club
+    <h3>
+        @Html.Raw(Model.Content)
+    </h3>
 </div>

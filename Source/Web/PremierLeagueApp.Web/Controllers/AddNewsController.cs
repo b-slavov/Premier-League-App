@@ -14,14 +14,12 @@
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: AddNews
         public ActionResult Index()
         {
             var news = this.db.News.Include(n => n.Club);
             return this.View(news.ToList());
         }
 
-        // GET: AddNews/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,7 +36,6 @@
             return this.View(news);
         }
 
-        // GET: AddNews/Create
         public ActionResult Create()
         {
             this.ViewData["Teams"] = this.db.Clubs.OrderBy(x => x.Name)
@@ -50,9 +47,6 @@
             return this.View();
         }
 
-        // POST: AddNews/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(NewsViewModel news)
@@ -74,7 +68,6 @@
             return this.View(news);
         }
 
-        // GET: AddNews/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,9 +85,6 @@
             return this.View(news);
         }
 
-        // POST: AddNews/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(News news)
@@ -112,7 +102,6 @@
             return this.View(news);
         }
 
-        // GET: AddNews/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -129,7 +118,6 @@
             return this.View(news);
         }
 
-        // POST: AddNews/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
