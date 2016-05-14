@@ -3,6 +3,8 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using PagedList;
+
     using PremierLeagueApp.Services.Data;
     using PremierLeagueApp.Web.Infrastructure.Mapping;
     using PremierLeagueApp.Web.ViewModels.Home;
@@ -18,21 +20,13 @@
             this.clubs = clubs;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var news = this.news.GetNews(12).To<NewsViewModel>().ToList();
-            var clubs =
-                this.Cache.Get(
-                    "clubs",
-                    () => this.clubs.GetAll().To<ClubViewModel>().ToList(),
-                    30 * 60);
-            var viewModel = new IndexViewModel
-            {
-                News = news,
-                Clubs = clubs
-            };
+            const int pageSize = 12;
 
-            return this.View(viewModel);
+            var news = this.news.GetNews().To<NewsViewModel>().ToList().ToPagedList(page, pageSize);
+
+            return this.View(news);
         }
     }
 }

@@ -6,7 +6,7 @@
 
     public interface INewsService
     {
-        IQueryable<News> GetNews(int count);
+        IQueryable<News> GetNews();
 
         News GetById(string id);
     }

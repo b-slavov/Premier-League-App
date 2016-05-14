@@ -1,4 +1,6 @@
-﻿@model PremierLeagueApp.Web.ViewModels.Home.IndexViewModel
+﻿@model PagedList.IPagedList<PremierLeagueApp.Web.ViewModels.Home.NewsViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Home Page";
 }
@@ -16,27 +18,6 @@
                 </div>
             </form>
 
-            <div class="dropdown pull-right">
-                <a class="btn btn-default btn-sm dropdown-toggle" id="news-order-dropdown" data-toggle="dropdown" aria-expanded="true">
-                    News order
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="forum-sub-menu">
-                    <li role="presentation">
-                        <a class="nonbordered" href="" role="menuitem">Latest</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="nonbordered" href="" role="menuitem">Oldest</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="nonbordered" href="" role="menuitem">Most readed</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="nonbordered" href="" role="menuitem">Most commented</a>
-                    </li>
-                </ul>
-            </div>
-
             <div class="pull-right">
                 <a class="btn btn-default btn-sm" href="/AddNews"><i class="glyphicon glyphicon-plus"></i> Add news</a>
             </div>
@@ -46,9 +27,9 @@
 </div>
 
 <div class="row">
-    @foreach (var news in Model.News)
+    @foreach (var news in Model)
     {
-        <div class="col-md-3">
+        <div id="news-container" class="col-md-3">
             <a href="@news.Url">
                 <img src="@Url.Content(news.ImageUrl)" alt="Image" />
                 @Html.Raw(news.Title)
@@ -56,3 +37,8 @@
         </div>
     }
 </div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

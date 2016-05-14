@@ -24,9 +24,9 @@
             return news;
         }
 
-        public IQueryable<News> GetNews(int count)
+        public IQueryable<News> GetNews()
         {
-            return this.news.All().OrderBy(x => x.CreatedOn).Take(count);
+            return this.news.All().OrderByDescending(x => x.CreatedOn);
         }
     }
 }
