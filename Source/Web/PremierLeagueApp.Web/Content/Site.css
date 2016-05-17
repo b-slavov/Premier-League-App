@@ -64,3 +64,13 @@ table th, table td {
     height: 200px;
     overflow: hidden;
 }
+
+#news-container:hover {
+    background-color: lightblue;
+    text-decoration: none;
+}
+
+
+#news-container a:hover {
+    text-decoration: none;
+}
