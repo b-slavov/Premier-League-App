@@ -6,18 +6,23 @@
     using System.Net;
     using System.Web.Mvc;
 
+    using PagedList;
+
     using PremierLeagueApp.Data;
     using PremierLeagueApp.Data.Models;
     using PremierLeagueApp.Web.ViewModels.Home;
 
     public class AddNewsController : Controller
     {
+        private const int PageSize = 12;
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var news = this.db.News.Include(n => n.Club);
-            return this.View(news.ToList());
+            var news = this.db.News.Include(n => n.Club).OrderByDescending(x => x.Id).ToList().ToPagedList(page, PageSize);
+
+            return this.View(news);
         }
 
         public ActionResult Details(int? id)

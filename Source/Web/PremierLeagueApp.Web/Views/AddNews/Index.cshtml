@@ -1,5 +1,6 @@
-﻿@model IEnumerable<PremierLeagueApp.Data.Models.News>
-
+﻿@model PagedList.IPagedList<PremierLeagueApp.Data.Models.News>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -9,36 +10,44 @@
 </h4>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Club.Name)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Id)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Club)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().ImageUrl)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedOn)
+        <th class="col-md-3">
+            @Html.DisplayNameFor(model => model.First().Content)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedOn)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().CreatedOn)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().ModifiedOn)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedOn)
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().IsDeleted)
         </th>
-        <th></th>
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.First().DeletedOn)
+        </th>
+        <th class="col-md-1">
+            Options
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Club.Name)
             </td>
@@ -49,7 +58,9 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                <div id="content">
+                    @Html.DisplayFor(modelItem => item.Content)
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedOn)
@@ -64,11 +75,14 @@
                 @Html.DisplayFor(modelItem => item.DeletedOn)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })<br />
+                @Html.ActionLink("Details", "Details", new { id = item.Id })<br />
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 
 </table>
+
+<br />
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

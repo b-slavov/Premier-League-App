@@ -11,6 +11,8 @@
 
     public class HomeController : BaseController
     {
+        private const int PageSize = 12;
+
         private readonly INewsService news;
         private readonly IClubService clubs;
 
@@ -22,9 +24,7 @@
 
         public ActionResult Index(int page = 1)
         {
-            const int pageSize = 12;
-
-            var news = this.news.GetNews().To<NewsViewModel>().ToList().ToPagedList(page, pageSize);
+            var news = this.news.GetNews().To<NewsViewModel>().ToList().ToPagedList(page, PageSize);
 
             return this.View(news);
         }

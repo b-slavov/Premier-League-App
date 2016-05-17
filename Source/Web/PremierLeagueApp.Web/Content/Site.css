@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 
-a {
+#news-container a {
     color: black;
     font-weight: bold;
     font-size: 18px;
@@ -52,6 +52,15 @@ img {
     border-radius: 5px;
 }
 
-#news-container a {
-    text-overflow: ellipsis;
+table {
+    table-layout: fixed;
+}
+
+table th, table td {
+    overflow: hidden;
+}
+
+#content {
+    height: 200px;
+    overflow: hidden;
 }
