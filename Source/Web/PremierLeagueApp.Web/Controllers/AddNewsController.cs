@@ -11,7 +11,7 @@
     using PremierLeagueApp.Data;
     using PremierLeagueApp.Data.Models;
     using PremierLeagueApp.Web.ViewModels.Home;
-
+    using Microsoft.AspNet.Identity;
     public class AddNewsController : Controller
     {
         private const int PageSize = 12;
@@ -54,6 +54,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create(NewsViewModel news)
         {
             var article = new News();
@@ -64,6 +65,7 @@
                 article.Content = news.Content;
                 article.CreatedOn = DateTime.Now;
                 article.ClubId = news.ClubId;
+                article.CreatorId = this.User.Identity.GetUserId();
                 this.db.News.Add(article);
                 this.db.SaveChanges();
 

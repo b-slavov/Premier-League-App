@@ -4,8 +4,10 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    using Data.Common;
-    using Data.Models;
+    using Crawler;
+
+    using PremierLeagueApp.Data.Common;
+    using PremierLeagueApp.Data.Models;
 
     public class TeamsController : Controller
     {
@@ -24,7 +26,7 @@
         public ActionResult TrackTeams()
         {
             var dbTeams = this.teams.All().ToList();
-            var trackedTeams = Crawler.TeamsInfo.GetPremierLeagueTeams();
+            var trackedTeams = TeamsInfo.GetPremierLeagueTeams();
 
             foreach (var team in trackedTeams)
             {

@@ -1,6 +1,4 @@
 ﻿@model PagedList.IPagedList<PremierLeagueApp.Web.ViewModels.Home.NewsViewModel>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Home Page";
 }
@@ -9,34 +7,33 @@
     <div class="col-lg-12">
         <h3>
             Latest News
-            <form class="form-inline pull-right" id="search" method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control input-sm" placeholder="Search" maxlength="100" value="">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default btn-sm" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
-
             <div class="pull-right">
-                <a class="btn btn-default btn-sm" href="/AddNews"><i class="glyphicon glyphicon-plus"></i> Add news</a>
+                @using (Ajax.BeginForm("Search", null, new AjaxOptions
+                {
+                    UpdateTargetId = "results",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST"
+                }, new { id = "searchForm" }))
+                {
+                    <input class="form-control input-sm pull-right" placeholder="Search" maxlength="100" value="" name="query" oninput="changed()" />
+                }
             </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="pull-right">
+                    <a class="btn btn-default btn-sm" href="/AddNews"><i class="glyphicon glyphicon-plus"></i> Add news</a>
+                </div>
+            }
 
         </h3>
     </div>
 </div>
 
-<div class="row">
-    @foreach (var news in Model)
-    {
-        <div id="news-container" class="col-md-3">
-            <a href="@news.Url">
-                <img src="@Url.Content(news.ImageUrl)" alt="Image" />
-                @Html.Raw(news.Title)
-            </a>
-        </div>
-    }
+<div id="results">
+    @Html.Partial("_NewsResult", Model)
 </div>
 
-<br />
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@section scripts {
+    <script src="~/Scripts/search.js"></script>
+}

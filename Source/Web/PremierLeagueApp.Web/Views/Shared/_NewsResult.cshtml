@@ -1,0 +1,17 @@
+﻿@model PagedList.IPagedList<PremierLeagueApp.Web.ViewModels.Home.NewsViewModel>
+@using PagedList.Mvc;
+
+<div class="row">
+    @foreach (var news in Model)
+    {
+        <div id="news-container" class="col-md-3">
+            <a href="@news.Url">
+                <img src="@Url.Content(news.ImageUrl)" alt="Image" />
+                @Html.Raw(news.Title)
+            </a>
+        </div>
+    }
+</div>
+
+<br />
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

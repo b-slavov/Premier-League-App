@@ -6,7 +6,10 @@
 }
 
 <h4>
-    @Html.ActionLink("Create", "Create")
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Create", "Create")
+    }
 </h4>
 <table class="table">
     <tr>

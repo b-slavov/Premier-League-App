@@ -92,6 +92,7 @@
     <Compile Include="News.cs" />
     <Compile Include="Club.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

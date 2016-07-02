@@ -17,9 +17,12 @@
             return clubs;
         }
 
-        public static void Main()
+        public static IList<TeamStats> GetTableInfo()
         {
-            GetPremierLeagueTeams();
+            var client = new WebClient();
+            string content = client.DownloadString("http://api.football-data.org/v1/soccerseasons/398/leagueTable");
+            var standing = JsonConvert.DeserializeObject<FootballData>(content);
+            return standing.Standing;
         }
     }
 }

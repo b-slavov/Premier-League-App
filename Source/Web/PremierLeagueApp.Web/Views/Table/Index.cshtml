@@ -1,7 +1,13 @@
-﻿
+﻿@model IEnumerable<PremierLeagueApp.Data.Models.TeamStats>
 @{
     ViewBag.Title = "Index";
 }
 
 <h3>Table</h3>
 
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <h4>@item.Position -  @item.TeamName - @item.Points</h4>
+    }
+</div>
